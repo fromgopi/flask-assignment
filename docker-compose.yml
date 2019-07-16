@@ -1,0 +1,22 @@
+version: "2"
+services:
+  web:
+    image: flask-assignment:latest
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    entrypoint: ./entrypoint.sh
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_USER: 'wekan'
+      MYSQL_ROOT_PASSWORD: 'wekan'
+      MYSQL_DB: 'flask-demo-wekan'
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
