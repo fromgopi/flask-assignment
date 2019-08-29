@@ -1,22 +1,18 @@
-version: "2"
+version: '2'
+
 services:
   web:
-    image: flask-assignment:latest
+    image: project:latest
+    expose:
+      - "8000"
     ports:
-      - "5000:5000"
+      - "8000:8000"
     volumes:
-      - .:/app
-    depends_on:
-      - db
-    entrypoint: ./entrypoint.sh
+      - /usr/src/app/web
+    command: /usr/local/bin/gunicorn -w 2 -b 0.0.0.0:8000 app:app
+    networks:
+      - backend
 
-  db:
-    image: mysql:5.7
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_USER: 'wekan'
-      MYSQL_ROOT_PASSWORD: 'wekan'
-      MYSQL_DB: 'flask-demo-wekan'
-    volumes:
-      - ./db:/docker-entrypoint-initdb.d/:ro
+networks:
+  backend:
+    driver: "bridge"
