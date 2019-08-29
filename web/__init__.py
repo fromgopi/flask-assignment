@@ -1,8 +1,9 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
 
 from web.commons.helper.responses import response
 
@@ -12,6 +13,13 @@ app.config['DEBUG'] = app.config.get("DEBUG")
 app.config['ENV'] = app.config.get("ENVIRONMENT")
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+migrate = Migrate(app, db)
+
+
+@app.route("/", methods=['GET'])
+def hello():
+    user = {'username': 'Gopi Krishna M'}
+    return render_template('index.htm', title='Gopi',  user=user)
 
 
 from web.auth.register.Register import register_module

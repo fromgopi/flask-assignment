@@ -1,0 +1,23 @@
+body{
+    font-family: 'Cabin Condensed', sans-serif, bold;
+    font-size: 17px;
+}
+.foot {
+    font-family: 'Kaushan Script', cursive;
+    background-color: orange;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    font-size: small;
+}
+
+.foot-ul {
+    text-align: center;
+}
+
+a{
+    color: black;
+}
